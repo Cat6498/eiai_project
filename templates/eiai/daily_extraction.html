@@ -1,0 +1,38 @@
+﻿{% extends 'eiai/base.html' %}
+{% load static %}
+{% load eiai_template_tags %}
+
+{% block title_block %}
+{{ deck.name }}
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{ deck.name }}</h1>
+    <h3>Daily extraction</h3>
+
+    <div>
+        <img src="{% static 'images/hood.jpg' %}" alt="Fatevi leggere il futuro" />
+    </div>
+
+    <div>
+        <p>
+            {% if random_cards %}
+            <ul>
+                {% for card in random_cards %}
+                <li>
+                    {{ card }}, <br/>
+                    {% get_words card as words %}
+                    {% if words %}
+                        {% for word in words %}
+                            {{ word }}
+                        {% endfor %}
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            No cards here yet
+            {% endif %}
+        </p>
+    </div>
+{% endblock %}

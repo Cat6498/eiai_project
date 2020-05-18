@@ -1,0 +1,22 @@
+{% extends 'eiai/base.html' %}
+{% load static %}
+
+{% block body_block %}
+    <h1>{{ boldmessage }}</h1>
+
+    <div>
+        <img src="{% static 'images/hood.jpg' %}" alt="Fatevi leggere il futuro" />
+    </div>
+
+    <div>
+        <p>
+            {% if decks %}
+                {% for deck in decks %}
+                    <a href="{% url 'eiai:show_deck' deck.slug %}">{{ deck }}</a>
+                {% endfor %}
+            {% else %}
+                No decks yet
+            {% endif %}
+        </p>
+    </div>
+{% endblock %}
