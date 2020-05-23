@@ -3,36 +3,41 @@
 {% load eiai_template_tags %}
 
 {% block title_block %}
-{{ deck.name }}
+{{ extraction.usedDeck }}
 {% endblock %}
 
 {% block body_block %}
-    <h1>{{ deck.name }}</h1>
+    <h1>{{ extraction.usedDeck }}</h1>
     <h3>Daily extraction</h3>
 
     <div>
         <img src="{% static 'images/hood.jpg' %}" alt="Fatevi leggere il futuro" />
     </div>
-
     <div>
+    {% if check %} 
+        <h4>You already had your daily extraction</h4>
+    {% else %} 
+        <h4>Your daily extraction</h4>
+    {% endif %}
         <p>
-            {% if random_cards %}
-            <ul>
-                {% for card in random_cards %}
-                <li>
-                    {{ card }}, <br/>
-                    {% get_words card as words %}
-                    {% if words %}
-                        {% for word in words %}
-                            {{ word }}
-                        {% endfor %}
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            No cards here yet
-            {% endif %}
-        </p>
+            {% if extraction.pickedCards %}
+                <ul>
+                    {% for card in extraction.pickedCards.all %}
+                    <li>
+                        {{ card }}, <br/>
+                        {% get_words card as words %}
+                        {% if words %}
+                            {% for word in words %}
+                                {{ word }}
+                            {% endfor %}
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                No cards here yet
+                {% endif %}
+            </p>
+
     </div>
 {% endblock %}

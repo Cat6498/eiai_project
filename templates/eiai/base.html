@@ -19,7 +19,12 @@
         <ul>
             <li><a href="{% url 'eiai:about' %}">About</a></li>
             <li><a href="{% url 'eiai:index' %}">Index</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'eiai:logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'eiai:login' %}">Login</a></li>
             <li><a href="{% url 'eiai:register' %}">Sign Up</a></li>
+            {% endif %}
         </ul>
     </div>
 
